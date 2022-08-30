@@ -34,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.falseButton.setOnClickListener {view:View ->
-            Toast.makeText(this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show()
+            val snackBar = Snackbar.make(view, R.string.incorrect_toast, Snackbar.LENGTH_LONG)
+            snackBar.setBackgroundTint(getColor(R.color.rojo))
+            snackBar.show()
         }
 
         val questionIdRes = questionBank[currentIndex].textResId
