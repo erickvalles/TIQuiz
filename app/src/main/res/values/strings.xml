@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TIQuiz</string>
+    <string name="question_cpu">El CPU se encarga de los gráficos</string>
+    <string name="question_gpu">Se divide en APU, ALU y ACHU</string>
+    <string name="question_keyboard">El teclado puede ser virtual</string>
+    <string name="question_ssh">SSH significa Secure Shell</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="correct_toast">¡Correcto!</string>
+    <string name="next_button">Siguiente</string>
+    <string name="incorrect_toast">¡Inconrrecto!</string>
+</resources>
