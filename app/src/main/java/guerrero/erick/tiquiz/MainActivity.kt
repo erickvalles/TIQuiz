@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import guerrero.erick.tiquiz.databinding.ActivityMainBinding
 
@@ -13,22 +14,16 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val quizViewModel:QuizViewModel by viewModels()
 
 
-    private val questionBank = listOf(
-        Question(R.string.question_cpu,false),
-        Question(R.string.question_gpu,false),
-        Question(R.string.question_ssh, true),
-        Question(R.string.question_keyboard, true)
-    )
-    private var currentIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG,"Se llamó al onCreate")
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.d(TAG,"Tengo un viewModel ${quizViewModel}")
 
         binding.questionTextView.setOnClickListener {
             updateQuestion()
@@ -43,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener { view:View->
+            quizViewModel.moveToNext()
             updateQuestion()
         }
 
@@ -78,13 +74,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateQuestion(){
-        currentIndex = (currentIndex +1) % questionBank.size
-        val questionIdRes = questionBank[currentIndex].textResId
+
+        val questionIdRes = quizViewModel.currentQuestionText
         binding.questionTextView.setText(questionIdRes)
     }
 
     private fun checkAnswer(userAnswer:Boolean, view:View){
-        val correctAnswer = questionBank[currentIndex].respuesta
+        val correctAnswer = quizViewModel.currentQuestionAnswer
 
         val mensaje = if(userAnswer == correctAnswer){
             R.string.correct_toast
